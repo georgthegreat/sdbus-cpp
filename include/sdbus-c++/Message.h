@@ -55,6 +55,8 @@ namespace sdbus {
     template <typename... _ValueTypes> class Struct;
     class UnixFd;
     class MethodReply;
+    class BusName;
+    using ConnectionName = BusName;
     namespace internal {
         class ISdBus;
     }
@@ -175,9 +177,9 @@ namespace sdbus {
 
         std::string getInterfaceName() const;
         std::string getMemberName() const;
-        std::string getSender() const;
+        ConnectionName getSender() const;
         ObjectPath getPath() const;
-        std::string getDestination() const;
+        ConnectionName getDestination() const;
         void peekType(std::string& type, std::string& contents) const;
         bool isValid() const;
         bool isEmpty() const;
@@ -273,7 +275,7 @@ namespace sdbus {
 
     public:
         Signal() = default;
-        void setDestination(const std::string& destination);
+        void setDestination(const ConnectionName& destination);
         void send() const;
     };
 
